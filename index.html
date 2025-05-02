@@ -30,44 +30,56 @@
     </footer>
 
     <script>
-    const images = [
-        "images/photo1.JPG",
-        "images/photo2.JPG",
-        "images/photo3.JPG",
-        "images/photo4.JPG"
-    ];
-    let currentIndex = 0;
+const images = [
+    "images/photo1.JPG",
+    "images/photo2.JPG",
+    "images/photo3.JPG",
+    "images/photo4.JPG"
+];
+let currentIndex = 0;
 
-    function openLightbox(index) {
-        currentIndex = index;
-        document.getElementById('lightbox-img').src = images[currentIndex];
-        document.getElementById('lightbox').style.display = 'flex';
+function openLightbox(index) {
+    currentIndex = index;
+    document.getElementById('lightbox-img').src = images[currentIndex];
+    document.getElementById('lightbox').style.display = 'flex';
 
-        // Add event listener to close the lightbox when clicking outside the image
-        document.getElementById('lightbox').addEventListener('click', closeLightbox);
-        
-        // Add event listener to close the lightbox with the Escape key
-        document.addEventListener('keydown', handleEscapeKey);
+    // Add event listener to close the lightbox when clicking outside the image
+    document.getElementById('lightbox').addEventListener('click', closeLightbox);
+    
+    // Add event listener to close the lightbox with the Escape key
+    document.addEventListener('keydown', handleEscapeKey);
+    
+    // Add event listener for left and right arrow keys for navigation
+    document.addEventListener('keydown', handleArrowKey);
+}
+
+function changeImage(direction) {
+    currentIndex = (currentIndex + direction + images.length) % images.length;
+    document.getElementById('lightbox-img').src = images[currentIndex];
+}
+
+function closeLightbox(event) {
+    // Only close the lightbox if the click is outside the image (not on the image itself)
+    if (event.target.id === 'lightbox') {
+        document.getElementById('lightbox').style.display = 'none';
+        document.removeEventListener('keydown', handleEscapeKey); // Remove event listener
+        document.removeEventListener('keydown', handleArrowKey); // Remove arrow key event listener
     }
+}
 
-    function changeImage(direction) {
-        currentIndex = (currentIndex + direction + images.length) % images.length;
-        document.getElementById('lightbox-img').src = images[currentIndex];
+function handleEscapeKey(event) {
+    if (event.key === 'Escape') {
+        closeLightbox({ target: document.getElementById('lightbox') });
     }
+}
 
-    function closeLightbox(event) {
-        // Only close the lightbox if the click is outside the image (not on the image itself)
-        if (event.target.id === 'lightbox') {
-            document.getElementById('lightbox').style.display = 'none';
-            document.removeEventListener('keydown', handleEscapeKey); // Remove event listener
-        }
+function handleArrowKey(event) {
+    if (event.key === 'ArrowLeft') {
+        changeImage(-1); // Go to the previous image
+    } else if (event.key === 'ArrowRight') {
+        changeImage(1); // Go to the next image
     }
-
-    function handleEscapeKey(event) {
-        if (event.key === 'Escape') {
-            closeLightbox({ target: document.getElementById('lightbox') });
-        }
-    }
-    </script>
+}
+</script>
 </body>
 </html>
