@@ -2,37 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rafid's Gallery</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
-  <div class="mode-toggle">
-    <input type="checkbox" id="modeToggle" />
-    <label for="modeToggle" class="slider-text">Dark Mode</label>
-  </div>
-
+<body class="light-mode">
   <header>
-    Rafid's Gallery
+    <h1>Rafid's Gallery</h1>
+    <p class="sub-header">
+      Devices:<br>
+      1. Sony A7C II + Sigma 28-70mm f/2.8 DG DN Contemporary Lens<br>
+      2. iPhone 13 Pro Max + Mood Camera App
+    </p>
+    <div class="mode-toggle">
+      <label>
+        <input type="checkbox" id="modeToggle" />
+        Dark Mode
+      </label>
+    </div>
   </header>
 
   <main class="gallery">
-    <img src="images/photo1.JPG" alt="Sample Photo 1" />
-    <img src="images/photo2.JPG" alt="Sample Photo 2" />
-    <img src="images/photo3.JPG" alt="Sample Photo 3" />
-    <img src="images/photo4.JPG" alt="Sample Photo 4" />
-    <img src="images/photo5.JPG" alt="Sample Photo 5" />
-    <img src="images/photo6.JPG" alt="Sample Photo 6" />
+    <img src="images/photo1.JPG" alt="Sample Photo 1">
+    <img src="images/photo2.JPG" alt="Sample Photo 2">
+    <img src="images/photo3.JPG" alt="Sample Photo 3">
+    <img src="images/photo4.JPG" alt="Sample Photo 4">
+    <img src="images/photo5.JPG" alt="Sample Photo 5">
+    <img src="images/photo6.JPG" alt="Sample Photo 6">
   </main>
 
   <div id="lightbox">
-    <span id="prev" class="nav-arrow">&#10094;</span>
-    <img id="lightbox-img" src="" alt="Full View" />
-    <span id="next" class="nav-arrow">&#10095;</span>
+    <span id="prev">&#10094;</span>
+    <img id="lightbox-img" src="" alt="Full View">
+    <span id="next">&#10095;</span>
   </div>
 
   <footer>
-    © 2025 Rafid. All rights reserved.
+    <p>© 2025 Rafid. All rights reserved.</p>
   </footer>
 
   <script src="script.js"></script>
