@@ -1,45 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rafid's Gallery</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rafid's Gallery</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Mode Toggle -->
+  <div class="mode-toggle">
+    <input type="checkbox" id="modeToggle" />
+    <label for="modeToggle" class="slider-text">Dark Mode</label>
+  </div>
 
-<header>
-    <h1>Rafid's Gallery</h1>
-</header>
+  <!-- Title -->
+  <header>
+    Rafid's Gallery
+  </header>
 
-<main class="gallery">
-    <img src="images/photo1.JPG" alt="Sample Photo 1" onclick="openLightbox(this)">
-    <img src="images/photo2.JPG" alt="Sample Photo 2" onclick="openLightbox(this)">
-    <img src="images/photo3.JPG" alt="Sample Photo 3" onclick="openLightbox(this)">
-    <img src="images/photo4.JPG" alt="Sample Photo 4" onclick="openLightbox(this)">
-    <img src="images/photo5.JPG" alt="Sample Photo 5" onclick="openLightbox(this)">
-    <img src="images/photo6.JPG" alt="Sample Photo 6" onclick="openLightbox(this)">
-</main>
+  <!-- Image Gallery -->
+  <main class="gallery">
+    <img src="images/photo1.JPG" alt="Sample Photo 1" />
+    <img src="images/photo2.JPG" alt="Sample Photo 2" />
+    <img src="images/photo3.JPG" alt="Sample Photo 3" />
+    <img src="images/photo4.JPG" alt="Sample Photo 4" />
+    <img src="images/photo5.JPG" alt="Sample Photo 5" />
+    <img src="images/photo6.JPG" alt="Sample Photo 6" />
+  </main>
 
-<div id="lightbox" onclick="closeLightbox()">
-    <img id="lightbox-img" src="" alt="Full View">
-    <span class="nav prev" onclick="changeImage(-1)">&#10094;</span>
-    <span class="nav next" onclick="changeImage(1)">&#10095;</span>
-</div>
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <img id="lightbox-img" src="" alt="Full View" />
+  </div>
 
-<div class="toggle-container">
-    <div class="slider-container">
-        <label class="mode-label light-label">Light Mode</label>
-        <input type="checkbox" id="modeToggle">
-        <label class="mode-label dark-label">Dark Mode</label>
-        <div class="slider"></div>
-    </div>
-</div>
+  <!-- Footer -->
+  <footer>
+    © 2025 Rafid. All rights reserved.
+  </footer>
 
-<footer>
-    <p>&copy; 2025 Rafid. All rights reserved.</p>
-</footer>
-
+  <!-- Script -->
+  <script src="script.js"></script>
 </body>
 </html>
