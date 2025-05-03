@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Nexa', sans-serif; /* Using Nexa Bold font */
   background: var(--bg-color, #f8f9fa);
   color: var(--text-color, #333);
   transition: background 0.3s, color 0.3s;
@@ -48,6 +48,7 @@ header {
 .mode-label {
   font-size: 1rem;
   margin: 0 10px;
+  color: white; /* Ensure the label is white */
 }
 
 .light-label {
