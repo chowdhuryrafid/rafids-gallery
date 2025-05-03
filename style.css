@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Nexa', sans-serif; /* Using Nexa Bold font */
+  font-family: 'Nexa', sans-serif; /* Ensure Nexa Bold font is used */
   background: var(--bg-color, #f8f9fa);
   color: var(--text-color, #333);
   transition: background 0.3s, color 0.3s;
@@ -21,9 +21,15 @@ header {
   color: white;
   padding: 2rem;
   text-align: center;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Default for light mode */
   position: relative;
   z-index: 10;
+  transition: box-shadow 0.3s ease-in-out;
+  font-family: 'Nexa', sans-serif; /* Apply Nexa Bold to header */
+}
+
+body.dark-mode header {
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.3); /* White shadow in dark mode */
 }
 
 .toggle-container {
@@ -49,6 +55,7 @@ header {
   font-size: 1rem;
   margin: 0 10px;
   color: white; /* Ensure the label is white */
+  font-family: 'Nexa', sans-serif; /* Apply Nexa Bold to labels */
 }
 
 .light-label {
@@ -149,4 +156,5 @@ footer {
   background: #e9ecef;
   font-size: 0.9rem;
   color: inherit;
+  font-family: 'Nexa', sans-serif; /* Apply Nexa Bold to footer text */
 }
