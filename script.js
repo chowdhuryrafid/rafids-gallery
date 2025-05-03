@@ -1,71 +1,70 @@
-// Lightbox logic
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-const galleryImages = document.querySelectorAll('.gallery img');
-let currentIndex = 0;
-
-// Open lightbox with clicked image
-function openLightbox(imgElement) {
-    lightbox.style.display = 'flex';
-    lightboxImg.src = imgElement.src;
-    currentIndex = Array.from(galleryImages).indexOf(imgElement);
-    document.body.style.overflow = 'hidden'; // prevent scrolling
-}
-
-// Close lightbox
-function closeLightbox(event) {
-    if (event.target === lightbox) {
-        lightbox.style.display = 'none';
-        document.body.style.overflow = '';
-    }
-}
-
-function closeLightboxWithKey(event) {
-    if (event.key === 'Escape' && lightbox.style.display === 'flex') {
-        lightbox.style.display = 'none';
-        document.body.style.overflow = '';
-    }
-}
-
-// Navigate through images
-function changeImage(direction) {
-    currentIndex += direction;
-
-    if (currentIndex < 0) currentIndex = galleryImages.length - 1;
-    if (currentIndex >= galleryImages.length) currentIndex = 0;
-
-    lightboxImg.src = galleryImages[currentIndex].src;
-}
-
-// Keyboard controls
-document.addEventListener('keydown', (event) => {
-    if (lightbox.style.display === 'flex') {
-        if (event.key === 'Escape') {
-            closeLightboxWithKey(event);
-        } else if (event.key === 'ArrowRight') {
-            changeImage(1);
-        } else if (event.key === 'ArrowLeft') {
-            changeImage(-1);
-        }
-    }
-});
-
-// Dark/Light Mode Toggle
 document.addEventListener('DOMContentLoaded', () => {
+    // Lightbox logic
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const galleryImages = document.querySelectorAll('.gallery img');
+    let currentIndex = 0;
+
+    galleryImages.forEach((img, index) => {
+        img.addEventListener('click', () => {
+            openLightbox(index);
+        });
+    });
+
+    function openLightbox(index) {
+        currentIndex = index;
+        lightboxImg.src = galleryImages[currentIndex].src;
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    // Close lightbox on outside click
+    lightbox.addEventListener('click', (event) => {
+        if (event.target === lightbox) {
+            closeLightbox();
+        }
+    });
+
+    // Close or navigate with keyboard
+    document.addEventListener('keydown', (event) => {
+        if (lightbox.style.display === 'flex') {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            } else if (event.key === 'ArrowRight') {
+                changeImage(1);
+            } else if (event.key === 'ArrowLeft') {
+                changeImage(-1);
+            }
+        }
+    });
+
+    function changeImage(direction) {
+        currentIndex = (currentIndex + direction + galleryImages.length) % galleryImages.length;
+        lightboxImg.src = galleryImages[currentIndex].src;
+    }
+
+    // Theme toggle logic
     const modeToggle = document.getElementById('modeToggle');
     const body = document.body;
     const footer = document.querySelector('footer');
     const modeLabel = document.querySelector('.slider-text');
 
-    modeToggle.addEventListener('change', () => {
-        const isDark = modeToggle.checked;
+    function applyTheme(isDark) {
         body.classList.toggle('dark-mode', isDark);
         body.classList.toggle('light-mode', !isDark);
-
-        // Update label text color
         modeLabel.style.color = isDark ? 'white' : 'black';
-
-        // Update footer text color
         footer.style.color = isDark ? 'white' : 'black';
+    }
+
+    modeToggle.addEventListener('change', () => {
+        applyTheme(modeToggle.checked);
     });
+
+    // Apply the initial theme
+    applyTheme(modeToggle.checked);
 });
