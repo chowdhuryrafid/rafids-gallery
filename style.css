@@ -29,7 +29,7 @@ header {
 }
 
 body.dark-mode header {
-  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.3); /* White shadow in dark mode */
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.6); /* Stronger white shadow in dark mode */
 }
 
 .toggle-container {
