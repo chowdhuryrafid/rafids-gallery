@@ -1,8 +1,19 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f8f9fa;
-  color: #333;
+  background: var(--bg-color, #f8f9fa);
+  color: var(--text-color, #333);
+  transition: background 0.3s, color 0.3s;
+}
+
+:root {
+  --bg-color: #f8f9fa;
+  --text-color: #333;
+}
+
+body.dark-mode {
+  --bg-color: #121212;
+  --text-color: #eeeeee;
 }
 
 header {
@@ -10,6 +21,26 @@ header {
   color: white;
   padding: 2rem;
   text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 10;
+}
+
+.toggle-container {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.toggle-container label {
+  color: inherit;
+  margin-left: 0.5rem;
+  user-select: none;
 }
 
 main.gallery {
@@ -72,4 +103,5 @@ footer {
   padding: 1rem;
   background: #e9ecef;
   font-size: 0.9rem;
+  color: inherit;
 }
