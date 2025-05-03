@@ -79,15 +79,20 @@ body.dark-mode footer {
     color: #ffffff;
 }
 
-/* Mode Toggle Switch */
+/* Floating Mode Toggle Switch */
 .mode-toggle {
-    position: absolute;
+    position: fixed;
     top: 20px;
     left: 20px;
     display: flex;
     align-items: center;
     gap: 10px;
-    color: white;
+    z-index: 999;
+    padding: 8px 12px;
+    background-color: rgba(68, 68, 68, 0.8);
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .slider-text {
@@ -95,7 +100,16 @@ body.dark-mode footer {
     color: white;
 }
 
-/* Optional styling for checkbox */
+/* Optional adjustments for mode label text */
+body.light-mode .slider-text {
+    color: white;
+}
+
+body.dark-mode .slider-text {
+    color: white;
+}
+
+/* Checkbox base styling */
 input[type="checkbox"] {
     width: 20px;
     height: 20px;
