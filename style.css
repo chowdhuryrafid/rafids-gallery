@@ -61,8 +61,9 @@ header {
 #lightbox-img {
   max-width: 90%;
   max-height: 80%;
-  border: 50px solid white; /* Much larger white frame */
-  padding: 10px;
+  border: 50px solid white;       /* White outer frame */
+  padding: 20px;                  /* Black inner mat */
+  background-color: black;       /* Solid black inside padding */
   box-sizing: border-box;
 }
 
