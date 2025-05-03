@@ -7,6 +7,11 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="toggle-container">
+    <input type="checkbox" id="modeToggle" onchange="toggleMode()">
+    <label for="modeToggle">Dark</label>
+  </div>
+
   <header>
     <h1>Rafid's Gallery</h1>
     <p>A showcase of moments captured through my lens</p>
@@ -79,6 +84,10 @@
       } else if (event.key === "ArrowRight") {
         changeImage(1);
       }
+    }
+
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
     }
   </script>
 </body>
