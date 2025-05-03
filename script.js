@@ -21,10 +21,13 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentIndex = 0;
 
     function showImage(index) {
-        if (index >= 0 && index < galleryImages.length) {
-            lightboxImg.src = galleryImages[index].src;
-            currentIndex = index;
+        if (index < 0) {
+            index = galleryImages.length - 1;
+        } else if (index >= galleryImages.length) {
+            index = 0;
         }
+        lightboxImg.src = galleryImages[index].src;
+        currentIndex = index;
     }
 
     galleryImages.forEach((img, index) => {
