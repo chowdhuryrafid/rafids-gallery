@@ -29,7 +29,22 @@ header {
 }
 
 body.dark-mode header {
-  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.6); /* Stronger white shadow in dark mode */
+  box-shadow: 0 8px 50px rgba(255, 255, 255, 0.8); /* Stronger white shadow in dark mode */
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #e9ecef;
+  font-size: 0.9rem;
+  color: inherit;
+  font-family: 'Nexa', sans-serif; /* Apply Nexa Bold to footer text */
+  transition: color 0.3s ease-in-out;
+}
+
+/* Dark mode footer text color change */
+body.dark-mode footer {
+  color: #ffffff; /* Make the footer text white in dark mode */
 }
 
 .toggle-container {
@@ -148,13 +163,4 @@ main.gallery img {
 
 #lightbox .next {
   right: 20px;
-}
-
-footer {
-  text-align: center;
-  padding: 1rem;
-  background: #e9ecef;
-  font-size: 0.9rem;
-  color: inherit;
-  font-family: 'Nexa', sans-serif; /* Apply Nexa Bold to footer text */
 }
