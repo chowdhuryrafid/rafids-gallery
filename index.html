@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rafid's Gallery</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Rafid's Gallery</h1>
+    <p>A showcase of moments captured through my lens</p>
+  </header>
+
+  <main class="gallery">
+    <!-- Images will be inserted here dynamically -->
+  </main>
+
+  <div id="lightbox">
+    <span class="nav prev" onclick="changeImage(-1)">❮</span>
+    <img id="lightbox-img" src="" alt="Full View">
+    <span class="nav next" onclick="changeImage(1)">❯</span>
+  </div>
+
+  <footer>
+    <p>© 2025 Rafid. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const imageCount = 4; // CHANGE THIS NUMBER WHEN ADDING NEW PHOTOS
+    const images = [];
+    const gallery = document.querySelector(".gallery");
+
+    for (let i = 1; i <= imageCount; i++) {
+      const imagePath = `images/photo${i}.JPG`;
+      images.push(imagePath);
+
+      const img = document.createElement("img");
+      img.src = imagePath;
+      img.alt = `Sample Photo ${i}`;
+      img.onclick = () => openLightbox(i - 1);
+      gallery.appendChild(img);
+    }
+
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      document.getElementById("lightbox-img").src = images[currentIndex];
+      document.getElementById("lightbox").style.display = "flex";
+
+      document.getElementById("lightbox").addEventListener("click", closeLightbox);
+      document.addEventListener("keydown", handleEscapeKey);
+      document.addEventListener("keydown", handleArrowKey);
+    }
+
+    function changeImage(direction) {
+      currentIndex = (currentIndex + direction + images.length) % images.length;
+      document.getElementById("lightbox-img").src = images[currentIndex];
+    }
+
+    function closeLightbox(event) {
+      if (event.target.id === "lightbox") {
+        document.getElementById("lightbox").style.display = "none";
+        document.removeEventListener("keydown", handleEscapeKey);
+        document.removeEventListener("keydown", handleArrowKey);
+      }
+    }
+
+    function handleEscapeKey(event) {
+      if (event.key === "Escape") {
+        closeLightbox({ target: document.getElementById("lightbox") });
+      }
+    }
+
+    function handleArrowKey(event) {
+      if (event.key === "ArrowLeft") {
+        changeImage(-1);
+      } else if (event.key === "ArrowRight") {
+        changeImage(1);
+      }
+    }
+  </script>
+</body>
+</html>
