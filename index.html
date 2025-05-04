@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rafid's Gallery</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="mode-toggle">
+    <label class="switch">
+      <input type="checkbox" id="modeSwitch">
+      <span class="slider"></span>
+    </label>
+    <span id="modeLabel">Dark Mode</span>
+  </div>
+
+  <header>
+    <h1>Rafid's Gallery</h1>
+    <p>
+      Devices<br>
+      Sony A7cII + Sigma 28-70mm f/2.8 DG DN Contemporary Lens<br>
+      iPhone 13 Pro Max + Mood Camera App
+    </p>
+  </header>
+
+  <main class="collections">
+    <div class="collection" onclick="openGallery('street')">
+      <img src="images/street/streetphoto1.JPG" alt="Street Thumbnail" />
+      <span>Street</span>
+    </div>
+    <div class="collection" onclick="openGallery('portraits')">
+      <img src="images/portraits/portraitsphoto1.JPG" alt="Portraits Thumbnail" />
+      <span>Portraits</span>
+    </div>
+    <div class="collection" onclick="openGallery('theatre')">
+      <img src="images/theatre/theatrephoto1.JPG" alt="Theatre Thumbnail" />
+      <span>Theatre</span>
+    </div>
+    <div class="collection" onclick="openGallery('landscapes')">
+      <img src="images/landscapes/landscapesphoto1.JPG" alt="Landscapes Thumbnail" />
+      <span>Landscapes</span>
+    </div>
+  </main>
+
+  <div id="lightbox" onclick="outsideClick(event)">
+    <button id="prevBtn" onclick="navigate(-1)">&#10094;</button>
+    <img id="lightbox-img" src="" alt="Full View">
+    <button id="nextBtn" onclick="navigate(1)">&#10095;</button>
+  </div>
+
+  <footer>
+    <p>© 2025 Rafid. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
