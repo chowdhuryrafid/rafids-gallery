@@ -1,47 +1,67 @@
-// Dark Mode Toggle
-const toggle = document.getElementById('darkSwitch');
-toggle.addEventListener('change', () => {
-  document.body.classList.toggle('dark-mode', toggle.checked);
-});
+// Global variable to keep track of the current photo index
+let currentImageIndex = 0;
+let images = [];
 
-// Lightbox functionality
-let currentCollection = '';
-let currentIndex = 0;
-const collections = {
-  street: ['images/street/streetphoto1.JPG', 'images/street/streetphoto2.JPG', 'images/street/streetphoto3.JPG', 'images/street/streetphoto4.JPG', 'images/street/streetphoto5.JPG', 'images/street/streetphoto6.JPG', 'images/street/streetphoto7.JPG', 'images/street/streetphoto8.JPG'],
-  landscapes: ['images/landscapes/landscapesphoto1.JPG', 'images/landscapes/landscapesphoto2.JPG', 'images/landscapes/landscapesphoto3.JPG'],
-  portraits: ['images/portraits/portraitsphoto1.JPG', 'images/portraits/portraitsphoto2.JPG', 'images/portraits/portraitsphoto3.JPG'],
-  theatre: ['images/theatre/theatrephoto1.JPG', 'images/theatre/theatrephoto2.JPG', 'images/theatre/theatrephoto3.JPG']
-};
+function openLightbox(imageElement) {
+    // Set up the lightbox and make it visible
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightbox-img");
 
-function openLightbox(collection, index) {
-  currentCollection = collection;
-  currentIndex = index;
-  const img = document.getElementById('lightbox-img');
-  img.src = collections[collection][index];
-  document.getElementById('lightbox').style.display = 'flex';
+    lightbox.style.display = "flex";
+    lightboxImage.src = imageElement.src;
+    lightboxImage.alt = imageElement.alt;
+
+    // Store the images for navigation purposes
+    images = Array.from(document.querySelectorAll(".collection img"));
+    currentImageIndex = images.indexOf(imageElement);
+
+    // Add event listeners for left/right arrow keys
+    document.addEventListener("keydown", handleArrowKeys);
 }
 
 function closeLightbox() {
-  document.getElementById('lightbox').style.display = 'none';
+    const lightbox = document.getElementById("lightbox");
+    lightbox.style.display = "none";
+
+    // Remove event listener for keyboard navigation
+    document.removeEventListener("keydown", handleArrowKeys);
 }
 
-function navigate(direction) {
-  currentIndex = (currentIndex + direction + collections[currentCollection].length) % collections[currentCollection].length;
-  const img = document.getElementById('lightbox-img');
-  img.src = collections[currentCollection][currentIndex];
+function handleArrowKeys(event) {
+    if (event.key === "Escape") {
+        closeLightbox(); // Exit lightbox on Escape key
+    }
+
+    if (event.key === "ArrowLeft") {
+        navigateImage(-1); // Navigate to previous image on left arrow
+    }
+
+    if (event.key === "ArrowRight") {
+        navigateImage(1); // Navigate to next image on right arrow
+    }
 }
 
-// Close lightbox when clicking outside the image
-document.getElementById('lightbox').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('lightbox')) {
-    closeLightbox();
-  }
-});
+function navigateImage(direction) {
+    // Update current image index based on direction
+    currentImageIndex += direction;
 
-// Close lightbox with the Escape key
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    closeLightbox();
-  }
+    // Loop around if we reach the end or start of the image array
+    if (currentImageIndex < 0) {
+        currentImageIndex = images.length - 1;
+    } else if (currentImageIndex >= images.length) {
+        currentImageIndex = 0;
+    }
+
+    const lightboxImage = document.getElementById("lightbox-img");
+    const newImage = images[currentImageIndex];
+    lightboxImage.src = newImage.src;
+    lightboxImage.alt = newImage.alt;
+}
+
+// Close the lightbox when clicking outside the image
+const lightbox = document.getElementById("lightbox");
+lightbox.addEventListener("click", (event) => {
+    if (event.target === lightbox) {
+        closeLightbox();
+    }
 });
