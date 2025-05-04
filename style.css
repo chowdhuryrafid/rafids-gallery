@@ -110,6 +110,8 @@ body.dark-mode footer {
 .lightbox-content {
   position: relative;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .lightbox-content img {
