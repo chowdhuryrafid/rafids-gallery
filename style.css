@@ -3,7 +3,7 @@ body {
   margin: 0;
   background-color: #fdfdfd;
   color: #000;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 1.3s, color 1.3s;
 }
 
 header, footer {
@@ -11,7 +11,7 @@ header, footer {
   text-align: center;
   padding: 1em;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s;
+  transition: box-shadow 1.3s;
 }
 
 header h1 {
