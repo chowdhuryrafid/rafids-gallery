@@ -1,64 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rafid's Gallery</title>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rafid's Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <!-- Dark Mode Toggle -->
-    <div id="darkModeToggle">
-        <label for="toggle" class="switch">
-            <input type="checkbox" id="toggle" />
-            <span class="slider"></span>
-        </label>
-        <p>Dark Mode</p>
+  <div id="darkModeToggle">
+    <label class="switch">
+      <input type="checkbox" id="toggle">
+      <span class="slider"></span>
+    </label>
+    <span>Dark Mode</span>
+  </div>
+
+  <header>
+    <h1>Rafid's Gallery</h1>
+    <div class="subheading">
+      <p>Devices</p>
+      <p>Sony A7cII + Sigma 28-70mm f/2.8 DG DN Contemporary Lens</p>
+      <p>iPhone 13 Pro Max + Mood Camera App</p>
     </div>
+  </header>
 
-    <header>
-        <h1>Rafid's Gallery</h1>
-        <div class="subheading">
-            <p>Devices:</p>
-            <p>1. Sony A7cII + Sigma 28-70mm f/2.8 DG DN Contemporary Lens</p>
-            <p>2. iPhone 13 Pro Max + Mood Camera App</p>
-        </div>
-    </header>
-
-    <div class="collections">
-        <!-- Collection Thumbnails (clickable) -->
-        <div class="collection" onclick="openCollection('street')">
-            <img src="images/street/streetphoto1.JPG" alt="Street" />
-            <p>Street</p>
-        </div>
-        <div class="collection" onclick="openCollection('portraits')">
-            <img src="images/portraits/portraitsphoto1.JPG" alt="Portraits" />
-            <p>Portraits</p>
-        </div>
-        <div class="collection" onclick="openCollection('landscapes')">
-            <img src="images/landscapes/landscapesphoto1.JPG" alt="Landscapes" />
-            <p>Landscapes</p>
-        </div>
-        <div class="collection" onclick="openCollection('theatre')">
-            <img src="images/theatre/theatrephoto1.JPG" alt="Theatre" />
-            <p>Theatre</p>
-        </div>
+  <div class="collections">
+    <div class="collection" data-name="street">
+      <img src="images/street/streetphoto1.JPG" alt="Street">
+      <p>Street</p>
     </div>
-
-    <!-- Lightbox -->
-    <div id="lightbox" class="lightbox">
-        <div class="lightbox-content">
-            <img id="lightbox-img" src="" alt="Full View">
-            <div class="prev" onclick="navigateImage(-1)">&#10094;</div>
-            <div class="next" onclick="navigateImage(1)">&#10095;</div>
-        </div>
+    <div class="collection" data-name="portraits">
+      <img src="images/portraits/portraitsphoto1.JPG" alt="Portraits">
+      <p>Portraits</p>
     </div>
+    <div class="collection" data-name="landscapes">
+      <img src="images/landscapes/landscapesphoto1.JPG" alt="Landscapes">
+      <p>Landscapes</p>
+    </div>
+    <div class="collection" data-name="theatre">
+      <img src="images/theatre/theatrephoto1.JPG" alt="Theatre">
+      <p>Theatre</p>
+    </div>
+  </div>
 
-    <footer>
-        <p>&copy; 2025 Rafid. All rights reserved.</p>
-    </footer>
+  <div id="lightbox" class="lightbox">
+    <div class="lightbox-content">
+      <span class="close" id="closeBtn">&times;</span>
+      <img id="lightbox-img" src="" alt="Full View" />
+      <span class="prev">&#10094;</span>
+      <span class="next">&#10095;</span>
+    </div>
+  </div>
 
-    <script src="script.js"></script>
+  <footer>
+    <p>&copy; 2025 Rafid. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
