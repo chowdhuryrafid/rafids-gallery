@@ -1,54 +1,79 @@
-// Dark Mode Toggle
-const darkModeToggle = document.getElementById("toggle");
-darkModeToggle.addEventListener("change", toggleDarkMode);
+const toggle = document.getElementById('toggle');
+const body = document.body;
+const collections = document.querySelectorAll('.collection');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeBtn = document.getElementById('closeBtn');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
 
-function toggleDarkMode() {
-    if (darkModeToggle.checked) {
-        document.body.classList.add("dark-mode");
-    } else {
-        document.body.classList.remove("dark-mode");
-    }
-}
+let currentCollection = '';
+let currentIndex = 0;
+let photoCounts = {
+  street: 8,
+  portraits: 3,
+  landscapes: 3,
+  theatre: 3
+};
 
-// Lightbox and Navigation
-let currentImageIndex = 0;
-let images = [];
+toggle.addEventListener('change', () => {
+  body.classList.toggle('dark-mode');
+});
 
-function openCollection(collectionName) {
-    const imageFolder = `images/${collectionName}/`;
-    images = [];
+collections.forEach(collection => {
+  collection.addEventListener('click', () => {
+    currentCollection = collection.dataset.name;
+    currentIndex = 1;
+    openLightbox();
+  });
+});
 
-    // Clear any previously opened images
-    const collectionImages = document.querySelectorAll(`.${collectionName} img`);
-    collectionImages.forEach((image, index) => {
-        images.push(image.src);
-    });
-
-    openLightbox(images[0]);
-}
-
-function openLightbox(imageSrc) {
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightbox-img");
-
-    lightbox.style.display = "flex";
-    lightboxImg.src = imageSrc;
-
-    // Set the current image index
-    currentImageIndex = images.indexOf(imageSrc);
-
-    document.addEventListener("keydown", handleArrowKeys);
+function openLightbox() {
+  lightbox.style.display = 'flex';
+  updateLightboxImage();
 }
 
 function closeLightbox() {
-    const lightbox = document.getElementById("lightbox");
-    lightbox.style.display = "none";
-
-    document.removeEventListener("keydown", handleArrowKeys);
+  lightbox.style.display = 'none';
 }
 
-function handleArrowKeys(event) {
-    if (event.key === "Escape") {
-        closeLightbox();
-    } else if (event.key === "ArrowLeft") {
-        navigate
+function updateLightboxImage() {
+  const path = `images/${currentCollection}/${currentCollection}photo${currentIndex}.JPG`;
+  lightboxImg.src = path;
+}
+
+prevBtn.addEventListener('click', () => {
+  currentIndex =
+    currentIndex === 1
+      ? photoCounts[currentCollection]
+      : currentIndex - 1;
+  updateLightboxImage();
+});
+
+nextBtn.addEventListener('click', () => {
+  currentIndex =
+    currentIndex === photoCounts[currentCollection]
+      ? 1
+      : currentIndex + 1;
+  updateLightboxImage();
+});
+
+closeBtn.addEventListener('click', closeLightbox);
+
+window.addEventListener('keydown', (e) => {
+  if (lightbox.style.display === 'flex') {
+    if (e.key === 'Escape') {
+      closeLightbox();
+    } else if (e.key === 'ArrowLeft') {
+      prevBtn.click();
+    } else if (e.key === 'ArrowRight') {
+      nextBtn.click();
+    }
+  }
+});
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) {
+    closeLightbox();
+  }
+});
