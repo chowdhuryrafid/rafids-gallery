@@ -1,0 +1,191 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Barlow Condensed', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+header, footer {
+    background-color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-content {
+    position: relative;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    border: 5px solid black;
+    border-radius: 10px;
+    margin: 20px;
+    object-fit: contain;
+}
+
+/* Thumbnails Container */
+.thumbnail {
+    width: 300px;
+    height: 200px;
+    margin: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumbnail:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.thumbnail .title {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Thumbnails Layout */
+.collection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+/* Header Box */
+.header-box {
+    background-color: #f4f4f4;
+    padding: 40px;
+    text-align: center;
+}
+
+.header-box h1 {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.header-box h3 {
+    font-size: 22px;
+}
+
+/* Dark/Light Mode Switch */
+.mode-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+#mode-text {
+    margin-right: 10px;
+    font-size: 18px;
+    color: black;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: #4CAF50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(14px);
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+body.dark-mode header,
+body.dark-mode footer {
+    background-color: black;
+}
+
+body.dark-mode .mode-toggle #mode-text {
+    color: white;
+}
+
+body.dark-mode .thumbnail .title {
+    color: black;
+}
+
+body.dark-mode .lightbox img {
+    border: 5px solid white;
+}
+
+/* Footer Box */
+footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #f4f4f4;
+}
