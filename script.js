@@ -1,65 +1,53 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const body = document.body;
-    const modeToggle = document.getElementById("modeToggle");
+let currentImages = [];
+let currentIndex = 0;
 
-    // Set initial mode
-    body.classList.add("light-mode");
+document.getElementById('modeToggle').addEventListener('change', function () {
+  document.body.classList.toggle('dark-mode', this.checked);
+});
 
-    modeToggle.addEventListener("change", () => {
-        if (modeToggle.checked) {
-            body.classList.remove("light-mode");
-            body.classList.add("dark-mode");
-        } else {
-            body.classList.remove("dark-mode");
-            body.classList.add("light-mode");
-        }
-    });
+function openCollection(folderName) {
+  const countMap = {
+    landscapes: 3,
+    portraits: 3,
+    theatre: 3,
+    street: 8
+  };
+  currentImages = [];
+  const count = countMap[folderName] || 0;
+  for (let i = 1; i <= count; i++) {
+    currentImages.push(`images/${folderName}/${folderName}photo${i}.JPG`);
+  }
+  openLightbox(0);
+}
 
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightbox-img");
-    const galleryImages = document.querySelectorAll(".gallery img");
-    let currentIndex = 0;
+function openLightbox(index) {
+  currentIndex = index;
+  document.getElementById('lightbox').style.display = 'flex';
+  document.getElementById('lightbox-img').src = currentImages[index];
+}
 
-    function showImage(index) {
-        if (index < 0) {
-            index = galleryImages.length - 1;
-        } else if (index >= galleryImages.length) {
-            index = 0;
-        }
-        lightboxImg.src = galleryImages[index].src;
-        currentIndex = index;
-    }
+function closeLightbox(event) {
+  if (event.target.id === 'lightbox' || event.key === 'Escape') {
+    document.getElementById('lightbox').style.display = 'none';
+  }
+}
 
-    galleryImages.forEach((img, index) => {
-        img.addEventListener("click", () => {
-            lightbox.style.display = "flex";
-            showImage(index);
-        });
-    });
+function prevImage(event) {
+  event.stopPropagation();
+  currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+  document.getElementById('lightbox-img').src = currentImages[currentIndex];
+}
 
-    document.getElementById("prev").addEventListener("click", () => {
-        showImage(currentIndex - 1);
-    });
+function nextImage(event) {
+  event.stopPropagation();
+  currentIndex = (currentIndex + 1) % currentImages.length;
+  document.getElementById('lightbox-img').src = currentImages[currentIndex];
+}
 
-    document.getElementById("next").addEventListener("click", () => {
-        showImage(currentIndex + 1);
-    });
-
-    lightbox.addEventListener("click", (e) => {
-        if (e.target === lightbox) {
-            lightbox.style.display = "none";
-        }
-    });
-
-    document.addEventListener("keydown", (e) => {
-        if (lightbox.style.display === "flex") {
-            if (e.key === "Escape") {
-                lightbox.style.display = "none";
-            } else if (e.key === "ArrowLeft") {
-                showImage(currentIndex - 1);
-            } else if (e.key === "ArrowRight") {
-                showImage(currentIndex + 1);
-            }
-        }
-    });
+document.addEventListener('keydown', function (e) {
+  if (document.getElementById('lightbox').style.display === 'flex') {
+    if (e.key === 'ArrowLeft') prevImage(e);
+    else if (e.key === 'ArrowRight') nextImage(e);
+    else if (e.key === 'Escape') closeLightbox(e);
+  }
 });
