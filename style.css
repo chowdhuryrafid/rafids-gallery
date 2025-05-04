@@ -1,0 +1,114 @@
+body {
+    margin: 0;
+    font-family: 'Barlow Condensed', sans-serif;
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+header {
+    text-align: center;
+    padding: 1rem;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.subheading {
+    font-size: 0.9rem;
+}
+
+.mode-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.mode-toggle label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: black;
+}
+
+main.collections {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.collection {
+    cursor: pointer;
+    text-align: center;
+}
+
+.collection img {
+    max-width: 300px;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+#lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+#lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border: 10px solid black;
+    box-shadow: 0 0 0 20px white;
+    background: black;
+}
+
+.nav-arrow {
+    font-size: 3rem;
+    color: white;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    padding: 0 1rem;
+    user-select: none;
+}
+
+.nav-arrow.left {
+    left: 10px;
+}
+
+.nav-arrow.right {
+    right: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: white;
+    font-size: 0.9rem;
+}
+
+/* Dark mode styles */
+body.dark {
+    background-color: black;
+    color: white;
+}
+
+body.dark .mode-toggle label {
+    color: white;
+}
+
+body.dark header,
+body.dark footer {
+    background-color: black;
+}
