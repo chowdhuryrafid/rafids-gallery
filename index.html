@@ -1,44 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rafid's Gallery</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafid's Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <header>
-    <h1>Rafid's Gallery</h1>
-    <p class="subheading">Devices: Sony A7cII + Sigma 28-70mm f/2.8 DG DN Contemporary Lens<br>
-      iPhone 13 Pro Max + Mood Camera App</p>
-  </header>
+    <header>
+        <h1>Rafid's Gallery</h1>
+        <div class="subheading">
+            <p>Devices: Sony A7cII + Sigma 28-70mm f/2.8 DG DN Contemporary Lens, Iphone 13 Pro Max + Mood Camera App</p>
+        </div>
+    </header>
 
-  <main class="collections">
-    <div class="collection" onclick="openCollection('street')">
-      <img src="images/street/streetphoto1.JPG" alt="Street Collection">
-      <p>Street</p>
-    </div>
-    <div class="collection" onclick="openCollection('portraits')">
-      <img src="images/portraits/portraitsphoto1.JPG" alt="Portraits Collection">
-      <p>Portraits</p>
-    </div>
-    <div class="collection" onclick="openCollection('landscapes')">
-      <img src="images/landscapes/landscapesphoto1.JPG" alt="Landscapes Collection">
-      <p>Landscapes</p>
-    </div>
-    <div class="collection" onclick="openCollection('theatre')">
-      <img src="images/theatre/theatrephoto1.JPG" alt="Theatre Collection">
-      <p>Theatre</p>
-    </div>
-  </main>
+    <main>
+        <div class="collections">
+            <!-- Collection thumbnails -->
+            <div class="collection" id="street">
+                <img src="images/street/streetphoto1.JPG" alt="Street" onclick="openLightbox('street', 0)">
+                <p>Street</p>
+            </div>
+            <div class="collection" id="landscapes">
+                <img src="images/landscapes/landscapesphoto1.JPG" alt="Landscapes" onclick="openLightbox('landscapes', 0)">
+                <p>Landscapes</p>
+            </div>
+            <div class="collection" id="portraits">
+                <img src="images/portraits/portraitsphoto1.JPG" alt="Portraits" onclick="openLightbox('portraits', 0)">
+                <p>Portraits</p>
+            </div>
+            <div class="collection" id="theatre">
+                <img src="images/theatre/theatrephoto1.JPG" alt="Theatre" onclick="openLightbox('theatre', 0)">
+                <p>Theatre</p>
+            </div>
+        </div>
+    </main>
 
-  <div id="lightbox" onclick="closeLightbox(event)">
-    <span class="nav left" onclick="navigate(-1, event)">&#10094;</span>
-    <img id="lightbox-img" alt="Full View">
-    <span class="nav right" onclick="navigate(1, event)">&#10095;</span>
-  </div>
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Full View">
+            <span class="prev" onclick="navigate(-1)">&lt;</span>
+            <span class="next" onclick="navigate(1)">&gt;</span>
+        </div>
+    </div>
 
-  <script src="script.js"></script>
+    <!-- Dark Mode Toggle -->
+    <div id="darkModeToggle">
+        <label>
+            <input type="checkbox" id="darkSwitch" />
+            Dark Mode
+        </label>
+    </div>
+
+    <footer>
+        <p>© 2025 Rafid. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
