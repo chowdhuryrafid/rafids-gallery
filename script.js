@@ -1,49 +1,47 @@
-const collections = {
-  street: 8,
-  portraits: 3,
-  landscapes: 3,
-  theatre: 3
-};
+// Dark Mode Toggle
+const toggle = document.getElementById('darkSwitch');
+toggle.addEventListener('change', () => {
+  document.body.classList.toggle('dark-mode', toggle.checked);
+});
 
+// Lightbox functionality
 let currentCollection = '';
 let currentIndex = 0;
+const collections = {
+  street: ['images/street/streetphoto1.JPG', 'images/street/streetphoto2.JPG', 'images/street/streetphoto3.JPG', 'images/street/streetphoto4.JPG', 'images/street/streetphoto5.JPG', 'images/street/streetphoto6.JPG', 'images/street/streetphoto7.JPG', 'images/street/streetphoto8.JPG'],
+  landscapes: ['images/landscapes/landscapesphoto1.JPG', 'images/landscapes/landscapesphoto2.JPG', 'images/landscapes/landscapesphoto3.JPG'],
+  portraits: ['images/portraits/portraitsphoto1.JPG', 'images/portraits/portraitsphoto2.JPG', 'images/portraits/portraitsphoto3.JPG'],
+  theatre: ['images/theatre/theatrephoto1.JPG', 'images/theatre/theatrephoto2.JPG', 'images/theatre/theatrephoto3.JPG']
+};
 
-function openCollection(name) {
-  currentCollection = name;
-  currentIndex = 1;
-  showImage();
+function openLightbox(collection, index) {
+  currentCollection = collection;
+  currentIndex = index;
+  const img = document.getElementById('lightbox-img');
+  img.src = collections[collection][index];
   document.getElementById('lightbox').style.display = 'flex';
 }
 
-function showImage() {
-  const img = document.getElementById('lightbox-img');
-  img.src = `images/${currentCollection}/${currentCollection}photo${currentIndex}.JPG`;
-}
-
-function navigate(direction, event) {
-  event.stopPropagation();
-  const max = collections[currentCollection];
-  currentIndex += direction;
-  if (currentIndex > max) currentIndex = 1;
-  if (currentIndex < 1) currentIndex = max;
-  showImage();
-}
-
-function closeLightbox(event) {
-  const img = document.getElementById('lightbox-img');
-  if (event.target === img) return;
+function closeLightbox() {
   document.getElementById('lightbox').style.display = 'none';
 }
 
-document.addEventListener('keydown', (e) => {
-  const lightbox = document.getElementById('lightbox');
-  if (lightbox.style.display !== 'flex') return;
+function navigate(direction) {
+  currentIndex = (currentIndex + direction + collections[currentCollection].length) % collections[currentCollection].length;
+  const img = document.getElementById('lightbox-img');
+  img.src = collections[currentCollection][currentIndex];
+}
 
+// Close lightbox when clicking outside the image
+document.getElementById('lightbox').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('lightbox')) {
+    closeLightbox();
+  }
+});
+
+// Close lightbox with the Escape key
+document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
-    lightbox.style.display = 'none';
-  } else if (e.key === 'ArrowRight') {
-    navigate(1, e);
-  } else if (e.key === 'ArrowLeft') {
-    navigate(-1, e);
+    closeLightbox();
   }
 });
