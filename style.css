@@ -58,6 +58,7 @@ body.dark-mode .sub-header {
   flex-wrap: wrap;
   gap: 40px;
   padding: 40px;
+  margin-top: 50px; /* Added margin to give space between the title box and collections */
 }
 
 .collection {
