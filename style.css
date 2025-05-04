@@ -11,6 +11,7 @@ header, footer {
   text-align: center;
   padding: 1em;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
 }
 
 header h1 {
@@ -149,6 +150,7 @@ input:checked + .slider:before {
 .dark-mode header,
 .dark-mode footer {
   background-color: #000;
+  box-shadow: 0 0 30px 15px white;
 }
 
 .dark-mode #modeLabel {
