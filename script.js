@@ -40,6 +40,20 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+// Prevent the arrows inside the lightbox from closing it
+const leftArrow = document.querySelector('.nav.left');
+const rightArrow = document.querySelector('.nav.right');
+
+leftArrow.addEventListener('click', (e) => {
+  e.stopPropagation(); // Prevents closing the lightbox
+  navigate(-1); // Navigate to the previous image
+});
+
+rightArrow.addEventListener('click', (e) => {
+  e.stopPropagation(); // Prevents closing the lightbox
+  navigate(1); // Navigate to the next image
+});
+
 document.getElementById('modeSwitch').addEventListener('change', toggleMode);
 
 function toggleMode() {
