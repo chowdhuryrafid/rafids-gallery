@@ -3,7 +3,7 @@ const lightboxImg = document.getElementById('lightbox-img');
 const modeSwitch = document.getElementById('modeSwitch');
 const modeLabel = document.getElementById('modeLabel');
 const collections = {
-  street: 8,
+  street: 9,
   portraits: 4,
   theatre: 3,
   landscapes: 3
