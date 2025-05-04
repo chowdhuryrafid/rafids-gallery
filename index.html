@@ -2,49 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rafid's Gallery</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&display=swap" rel="stylesheet">
 </head>
 <body class="light-mode">
-  <header>
+
+  <header class="title-box">
     <h1>Rafid's Gallery</h1>
-    <h2>Devices</h2>
-    <p>Sony A7cII + Sigma 28-70mm f/2.8 DG DN Contemporary Lens<br>
-       iPhone 13 Pro Max + Mood Camera App</p>
+    <p class="sub-header">
+      Devices<br>
+      Sony A7cII + Sigma 28-70mm f/2.8 DG DN Contemporary Lens<br>
+      iPhone 13 Pro Max + Mood Camera App
+    </p>
   </header>
 
-  <div class="theme-toggle">
+  <div class="mode-toggle">
     <label>
-      <input type="checkbox" id="modeToggle" />
-      Dark Mode
+      <input type="checkbox" id="mode-switch" />
+      <span class="slider"></span>
+      <span class="mode-label">Dark Mode</span>
     </label>
   </div>
 
-  <main class="collections">
-    <div class="collection" onclick="openCollection('landscapes')">
-      <img src="images/landscapes/landscapesphoto1.JPG" alt="Landscapes">
-      <p>Landscapes</p>
+  <main class="collection-gallery">
+    <div class="collection" onclick="openCollection('street')">
+      <img src="images/street/streetphoto1.JPG" alt="Street Collection" />
+      <p>Street</p>
     </div>
     <div class="collection" onclick="openCollection('portraits')">
-      <img src="images/portraits/portraitsphoto1.JPG" alt="Portraits">
+      <img src="images/portraits/portraitsphoto1.JPG" alt="Portraits Collection" />
       <p>Portraits</p>
     </div>
-    <div class="collection" onclick="openCollection('theatre')">
-      <img src="images/theatre/theatrephoto1.JPG" alt="Theatre">
-      <p>Theatre</p>
+    <div class="collection" onclick="openCollection('landscapes')">
+      <img src="images/landscapes/landscapesphoto1.JPG" alt="Landscapes Collection" />
+      <p>Landscapes</p>
     </div>
-    <div class="collection" onclick="openCollection('street')">
-      <img src="images/street/streetphoto1.JPG" alt="Street">
-      <p>Street</p>
+    <div class="collection" onclick="openCollection('theatre')">
+      <img src="images/theatre/theatrephoto1.JPG" alt="Theatre Collection" />
+      <p>Theatre</p>
     </div>
   </main>
 
-  <div id="lightbox" onclick="closeLightbox(event)">
-    <span id="prevBtn" onclick="prevImage(event)">&#10094;</span>
+  <div id="lightbox" onclick="clickOutsideLightbox(event)">
+    <span class="nav-arrow left" onclick="navigateLightbox(-1)">&#10094;</span>
     <img id="lightbox-img" src="" alt="Full View" />
-    <span id="nextBtn" onclick="nextImage(event)">&#10095;</span>
+    <span class="nav-arrow right" onclick="navigateLightbox(1)">&#10095;</span>
   </div>
 
   <footer>
