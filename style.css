@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -77,6 +79,14 @@ header h1 {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+#darkModeLabel {
+  color: #000;
+  transition: color 0.3s;
+}
+
+body.dark-mode #darkModeLabel {
   color: #fff;
 }
 
@@ -151,21 +161,23 @@ body.dark-mode footer {
   justify-content: center;
   background: rgba(0, 0, 0, 0.8);
   z-index: 9999;
+  padding: 20px;
 }
 
 .lightbox-content {
   position: relative;
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .lightbox-content img {
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
+  max-width: calc(100vw - 80px);
+  max-height: calc(100vh - 80px);
   border: 10px solid black;
   outline: 20px solid white;
   object-fit: contain;
+  display: block;
+  margin: auto;
 }
 
 .lightbox .close {
