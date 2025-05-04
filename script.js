@@ -1,58 +1,72 @@
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-const modeSwitch = document.getElementById('modeSwitch');
-const modeLabel = document.getElementById('modeLabel');
-const collections = {
-  street: 8,
-  portraits: 3,
-  theatre: 3,
-  landscapes: 3
-};
+const themeToggle = document.getElementById("theme-toggle");
+const themeCheckbox = document.getElementById("theme-switch");
+const themeLabel = document.getElementById("theme-label");
 
+themeCheckbox.addEventListener("change", () => {
+  document.body.classList.toggle("dark-mode");
+  themeLabel.textContent = themeCheckbox.checked ? "Light Mode" : "Dark Mode";
+});
+
+// Lightbox logic
+let currentImages = [];
 let currentIndex = 0;
-let currentCollection = '';
-let photos = [];
 
-function openGallery(folder) {
-  currentCollection = folder;
-  photos = Array.from({ length: collections[folder] }, (_, i) => `images/${folder}/${folder}photo${i + 1}.JPG`);
-  currentIndex = 0;
-  openLightbox();
-}
-
-function openLightbox() {
+function openLightbox(images, index) {
+  currentImages = images;
+  currentIndex = index;
   updateLightboxImage();
-  lightbox.style.display = 'flex';
-}
-
-function updateLightboxImage() {
-  lightboxImg.src = photos[currentIndex];
+  document.getElementById("lightbox").classList.add("active");
+  document.body.classList.add("lightbox-active");
 }
 
 function closeLightbox() {
-  lightbox.style.display = 'none';
+  document.getElementById("lightbox").classList.remove("active");
+  document.body.classList.remove("lightbox-active");
 }
 
-function navigate(direction) {
-  currentIndex = (currentIndex + direction + photos.length) % photos.length;
+function updateLightboxImage() {
+  const img = document.querySelector("#lightbox img");
+  img.src = currentImages[currentIndex];
+}
+
+// Navigate with arrows
+function showNextImage() {
+  currentIndex = (currentIndex + 1) % currentImages.length;
   updateLightboxImage();
 }
 
-function outsideClick(event) {
-  if (event.target === lightbox) {
-    closeLightbox();
-  }
+function showPrevImage() {
+  currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+  updateLightboxImage();
 }
 
-document.addEventListener('keydown', (e) => {
-  if (lightbox.style.display === 'flex') {
-    if (e.key === 'ArrowRight') navigate(1);
-    if (e.key === 'ArrowLeft') navigate(-1);
-    if (e.key === 'Escape') closeLightbox();
+// Attach to global for use in HTML
+window.openLightbox = openLightbox;
+
+document.getElementById("lightbox").addEventListener("click", (e) => {
+  if (e.target.id === "lightbox") {
+    closeLightbox();
   }
 });
 
-modeSwitch.addEventListener('change', () => {
-  document.body.classList.toggle('dark-mode', modeSwitch.checked);
-  modeLabel.textContent = modeSwitch.checked ? 'Light Mode' : 'Dark Mode';
+document.getElementById("prev-arrow").addEventListener("click", (e) => {
+  e.stopPropagation();
+  showPrevImage();
+});
+
+document.getElementById("next-arrow").addEventListener("click", (e) => {
+  e.stopPropagation();
+  showNextImage();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (document.getElementById("lightbox").classList.contains("active")) {
+    if (e.key === "Escape") {
+      closeLightbox();
+    } else if (e.key === "ArrowRight") {
+      showNextImage();
+    } else if (e.key === "ArrowLeft") {
+      showPrevImage();
+    }
+  }
 });
