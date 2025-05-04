@@ -1,59 +1,72 @@
+const collections = document.querySelectorAll('.collection');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const leftArrow = document.querySelector('.lightbox-arrow.left');
+const rightArrow = document.querySelector('.lightbox-arrow.right');
+
+let currentImages = [];
 let currentIndex = 0;
-let images = [];
 
-// Get all images in each collection and store them in an array
-const collections = ['street', 'portraits', 'landscapes', 'theatre'];
-collections.forEach((collection) => {
-    const collectionImages = Array.from(document.querySelectorAll(`.${collection} img`));
-    images.push(...collectionImages);
+collections.forEach(collection => {
+  collection.addEventListener('click', () => {
+    const folder = collection.dataset.folder;
+    let count;
+
+    switch (folder) {
+      case 'street': count = 8; break;
+      case 'portraits':
+      case 'landscapes':
+      case 'theatre': count = 3; break;
+      default: count = 0;
+    }
+
+    currentImages = [];
+    for (let i = 1; i <= count; i++) {
+      currentImages.push(`images/${folder}/${folder}photo${i}.JPG`);
+    }
+
+    currentIndex = 0;
+    openLightbox();
+  });
 });
 
-// Open lightbox when clicking an image
-function openLightbox(imageElement) {
-    currentIndex = images.indexOf(imageElement);
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    lightboxImg.src = imageElement.src;
-    lightbox.style.display = "block";
-    document.body.style.overflow = "hidden";  // Prevent scrolling
+function openLightbox() {
+  lightboxImg.src = currentImages[currentIndex];
+  lightbox.style.display = 'flex';
 }
 
-// Close lightbox
 function closeLightbox() {
-    document.getElementById('lightbox').style.display = "none";
-    document.body.style.overflow = "auto";  // Enable scrolling again
+  lightbox.style.display = 'none';
+  lightboxImg.src = '';
 }
 
-// Keyboard navigation: Left and Right arrows
-document.addEventListener('keydown', function(event) {
-    const lightbox = document.getElementById('lightbox');
-    if (lightbox.style.display === "block") {
-        if (event.key === "ArrowLeft") {
-            navigateLightbox('prev');
-        } else if (event.key === "ArrowRight") {
-            navigateLightbox('next');
-        } else if (event.key === "Escape") {
-            closeLightbox();
-        }
-    }
-});
-
-// Click navigation
-document.querySelector('.lightbox-arrow.left').addEventListener('click', function() {
-    navigateLightbox('prev');
-});
-
-document.querySelector('.lightbox-arrow.right').addEventListener('click', function() {
-    navigateLightbox('next');
-});
-
-// Function to navigate lightbox images
-function navigateLightbox(direction) {
-    if (direction === 'next') {
-        currentIndex = (currentIndex + 1) % images.length;  // Loop back to the first image
-    } else if (direction === 'prev') {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;  // Loop back to the last image
-    }
-    const lightboxImg = document.getElementById('lightbox-img');
-    lightboxImg.src = images[currentIndex].src;
+function showNextImage() {
+  currentIndex = (currentIndex + 1) % currentImages.length;
+  lightboxImg.src = currentImages[currentIndex];
 }
+
+function showPrevImage() {
+  currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+  lightboxImg.src = currentImages[currentIndex];
+}
+
+rightArrow.addEventListener('click', showNextImage);
+leftArrow.addEventListener('click', showPrevImage);
+
+document.addEventListener('keydown', (e) => {
+  if (lightbox.style.display === 'flex') {
+    if (e.key === 'Escape') {
+      closeLightbox();
+    } else if (e.key === 'ArrowRight') {
+      showNextImage();
+    } else if (e.key === 'ArrowLeft') {
+      showPrevImage();
+    }
+  }
+});
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) {
+    closeLightbox();
+  }
+});
