@@ -4,10 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rafid's Gallery</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="mode-toggle">
+    <label class="switch">
+      <input type="checkbox" id="modeSwitch" />
+      <span class="slider round"></span>
+    </label>
+    <span id="modeLabel">Dark Mode</span>
+  </div>
+
   <header class="header-box">
     <h1>Rafid's Gallery</h1>
     <p>Devices<br>
@@ -15,40 +23,32 @@
       iPhone 13 Pro Max + Mood Camera App</p>
   </header>
 
-  <div class="mode-toggle">
-    <span class="mode-label">Dark Mode</span>
-    <label class="switch">
-      <input type="checkbox" id="mode-switch">
-      <span class="slider round"></span>
-    </label>
-  </div>
-
-  <main class="collections">
-    <div class="collection" onclick="openCollection('street')">
-      <img src="images/street/streetphoto1.JPG" alt="Street">
+  <main class="collection-grid">
+    <div class="collection" onclick="openGallery('street')">
+      <img src="images/street/streetphoto1.JPG" alt="Street Collection">
       <p>Street</p>
     </div>
-    <div class="collection" onclick="openCollection('portraits')">
-      <img src="images/portraits/portraitsphoto1.JPG" alt="Portraits">
+    <div class="collection" onclick="openGallery('portraits')">
+      <img src="images/portraits/portraitsphoto1.JPG" alt="Portraits Collection">
       <p>Portraits</p>
     </div>
-    <div class="collection" onclick="openCollection('theatre')">
-      <img src="images/theatre/theatrephoto1.JPG" alt="Theatre">
+    <div class="collection" onclick="openGallery('theatre')">
+      <img src="images/theatre/theatrephoto1.JPG" alt="Theatre Collection">
       <p>Theatre</p>
     </div>
-    <div class="collection" onclick="openCollection('landscapes')">
-      <img src="images/landscapes/landscapesphoto1.JPG" alt="Landscapes">
+    <div class="collection" onclick="openGallery('landscapes')">
+      <img src="images/landscapes/landscapesphoto1.JPG" alt="Landscapes Collection">
       <p>Landscapes</p>
     </div>
   </main>
 
-  <div id="lightbox" onclick="closeLightbox(event)">
-    <button class="nav left" onclick="prevImage(event)">&#10094;</button>
-    <img id="lightbox-img" src="" alt="Full View">
-    <button class="nav right" onclick="nextImage(event)">&#10095;</button>
+  <div id="lightbox" onclick="outsideClick(event)">
+    <span class="lightbox-arrow left" onclick="navigate(-1, event)">&#10094;</span>
+    <img id="lightbox-img" alt="Full View" />
+    <span class="lightbox-arrow right" onclick="navigate(1, event)">&#10095;</span>
   </div>
 
-  <footer class="footer-box">
+  <footer>
     <p>© 2025 Rafid. All rights reserved.</p>
   </footer>
 
