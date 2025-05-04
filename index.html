@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafid's Gallery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Dark/Light Mode Toggle -->
+    <div class="mode-toggle">
+        <span id="mode-text">Light Mode</span>
+        <label class="switch">
+            <input type="checkbox" id="mode-switch">
+            <span class="slider round"></span>
+        </label>
+    </div>
+
+    <!-- Header Box -->
+    <div class="header-box">
+        <h1>Rafid's Gallery</h1>
+        <h3>Photography Collection</h3>
+    </div>
+
+    <!-- Collections Section -->
+    <div class="collection">
+        <div class="thumbnail" onclick="openGallery('street')">
+            <img src="images/street/streetphoto1.JPG" alt="Street Photo 1">
+            <div class="title">Street</div>
+        </div>
+        <div class="thumbnail" onclick="openGallery('portraits')">
+            <img src="images/portraits/portraitsphoto1.JPG" alt="Portraits Photo 1">
+            <div class="title">Portraits</div>
+        </div>
+        <div class="thumbnail" onclick="openGallery('landscapes')">
+            <img src="images/landscapes/landscapesphoto1.JPG" alt="Landscapes Photo 1">
+            <div class="title">Landscapes</div>
+        </div>
+        <div class="thumbnail" onclick="openGallery('theatre')">
+            <img src="images/theatre/theatrephoto1.JPG" alt="Theatre Photo 1">
+            <div class="title">Theatre</div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Full View">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
