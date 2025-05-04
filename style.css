@@ -9,7 +9,6 @@ body {
 
 header {
   text-align: center;
-  background-color: #ccc;
   padding: 20px;
 }
 
@@ -29,14 +28,38 @@ header h1 {
 footer {
   text-align: center;
   padding: 10px;
-  background-color: #f1f1f1;
   position: absolute;
   width: 100%;
   bottom: 0;
 }
 
-footer p {
-  margin: 0;
+/* Light Mode and Dark Mode Backgrounds */
+body {
+  background-color: #fff;
+}
+
+body.dark-mode {
+  background-color: #111;
+  color: white;
+}
+
+header {
+  background-color: white;
+}
+
+footer {
+  background-color: white;
+}
+
+/* Dark Mode Header & Footer */
+body.dark-mode header {
+  background-color: black;
+  color: white;
+}
+
+body.dark-mode footer {
+  background-color: black;
+  color: white;
 }
 
 /* Collections grid */
@@ -118,11 +141,6 @@ footer p {
 }
 
 /* Dark Mode Styles */
-body.dark-mode {
-  background-color: #111;
-  color: white;
-}
-
 body.dark-mode h1,
 body.dark-mode h2,
 body.dark-mode h3,
