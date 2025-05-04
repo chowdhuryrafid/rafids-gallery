@@ -156,7 +156,3 @@ input:checked + .slider:before {
 .dark-mode #modeLabel {
   color: white;
 }
-/* Hide theme toggle when lightbox is active */
-.lightbox-active #theme-toggle {
-  display: none;
-}
