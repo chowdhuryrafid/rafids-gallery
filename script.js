@@ -4,7 +4,7 @@ const modeSwitch = document.getElementById('modeSwitch');
 const modeLabel = document.getElementById('modeLabel');
 const collections = {
   street: 8,
-  portraits: 3,
+  portraits: 4,
   theatre: 3,
   landscapes: 3
 };
