@@ -2,41 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rafid's Gallery</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
 </head>
 <body class="light-mode">
   <header>
     <h1>Rafid's Gallery</h1>
-    <p class="sub-header">
-      Devices<br>
-      Sony A7C II + Sigma 28-70mm f/2.8 DG DN Contemporary Lens<br>
-      iPhone 13 Pro Max + Mood Camera App
-    </p>
-    <div class="mode-toggle">
-      <label>
-        <input type="checkbox" id="modeToggle" />
-        Dark Mode
-      </label>
-    </div>
+    <h2>Devices</h2>
+    <p>Sony A7cII + Sigma 28-70mm f/2.8 DG DN Contemporary Lens<br>
+       iPhone 13 Pro Max + Mood Camera App</p>
   </header>
 
-  <main class="gallery">
-    <img src="images/photo1.JPG" alt="Sample Photo 1">
-    <img src="images/photo2.JPG" alt="Sample Photo 2">
-    <img src="images/photo3.JPG" alt="Sample Photo 3">
-    <img src="images/photo4.JPG" alt="Sample Photo 4">
-    <img src="images/photo5.JPG" alt="Sample Photo 5">
-    <img src="images/photo6.JPG" alt="Sample Photo 6">
-    <img src="images/photo7.JPG" alt="Sample Photo 7">
-    <img src="images/photo8.JPG" alt="Sample Photo 8">
+  <div class="theme-toggle">
+    <label>
+      <input type="checkbox" id="modeToggle" />
+      Dark Mode
+    </label>
+  </div>
+
+  <main class="collections">
+    <div class="collection" onclick="openCollection('landscapes')">
+      <img src="images/landscapes/landscapesphoto1.JPG" alt="Landscapes">
+      <p>Landscapes</p>
+    </div>
+    <div class="collection" onclick="openCollection('portraits')">
+      <img src="images/portraits/portraitsphoto1.JPG" alt="Portraits">
+      <p>Portraits</p>
+    </div>
+    <div class="collection" onclick="openCollection('theatre')">
+      <img src="images/theatre/theatrephoto1.JPG" alt="Theatre">
+      <p>Theatre</p>
+    </div>
+    <div class="collection" onclick="openCollection('street')">
+      <img src="images/street/streetphoto1.JPG" alt="Street">
+      <p>Street</p>
+    </div>
   </main>
 
-  <div id="lightbox">
-    <span id="prev">&#10094;</span>
-    <img id="lightbox-img" src="" alt="Full View">
-    <span id="next">&#10095;</span>
+  <div id="lightbox" onclick="closeLightbox(event)">
+    <span id="prevBtn" onclick="prevImage(event)">&#10094;</span>
+    <img id="lightbox-img" src="" alt="Full View" />
+    <span id="nextBtn" onclick="nextImage(event)">&#10095;</span>
   </div>
 
   <footer>
