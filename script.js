@@ -18,6 +18,7 @@ function openGallery(folder) {
   currentCollection = folder;
   photos = Array.from({ length: collections[folder] }, (_, i) => `images/${folder}/${folder}photo${i + 1}.JPG`);
   currentIndex = 0;
+  preloadImages(); // Preload images before opening the lightbox
   openLightbox();
 }
 
@@ -57,3 +58,11 @@ modeSwitch.addEventListener('change', () => {
   document.body.classList.toggle('dark-mode', modeSwitch.checked);
   modeLabel.textContent = modeSwitch.checked ? 'Light Mode' : 'Dark Mode';
 });
+
+// Preload images in the gallery
+function preloadImages() {
+  photos.forEach(photo => {
+    const img = new Image();
+    img.src = photo; // This loads the image
+  });
+}
