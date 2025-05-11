@@ -6,7 +6,8 @@ const collections = {
   street: 9,
   portraits: 4,
   theatre: 3,
-  landscapes: 3
+  landscapes: 3,
+  nature: 5
 };
 
 let currentIndex = 0;
