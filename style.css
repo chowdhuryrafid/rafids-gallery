@@ -156,3 +156,76 @@ input:checked + .slider:before {
 .dark-mode #modeLabel {
   color: white;
 }
+
+/* Mobile and tablet styles */
+@media (max-width: 768px) {
+
+  /* Gallery Collection Thumbnails */
+  .collections {
+    flex-direction: column; /* Stack the collections vertically */
+    margin: 20px; /* Adjust margin for smaller screens */
+  }
+
+  .collection {
+    width: 100%; /* Make each collection item take full width */
+    margin-bottom: 20px; /* Add some space between the collections */
+  }
+
+  .collection img {
+    width: 100%; /* Make the images responsive and fill the container */
+    height: auto; /* Maintain the aspect ratio */
+    border-radius: 8px;
+  }
+
+  /* Header text adjustments */
+  header h1 {
+    font-size: 2em; /* Smaller heading size for mobile */
+  }
+
+  header p {
+    font-size: 0.9em; /* Smaller text size for mobile */
+  }
+
+  /* Lightbox Image adjustments */
+  #lightbox-img {
+    max-width: 80%; /* Limit image size in lightbox */
+    max-height: 80%; /* Limit image height in lightbox */
+  }
+
+  /* Navigation buttons in the lightbox */
+  #prevBtn, #nextBtn {
+    font-size: 2em; /* Smaller buttons for mobile */
+  }
+
+  /* Switch for dark/light mode */
+  #mode-toggle {
+    top: 10px;
+    left: 10px;
+    font-size: 0.8em; /* Reduce size of the mode switch on mobile */
+  }
+
+  /* Footer adjustments */
+  footer {
+    font-size: 0.8em; /* Smaller footer text */
+  }
+}
+
+/* Very Small Devices (Mobile Phones) */
+@media (max-width: 480px) {
+
+  /* Header text adjustments */
+  header h1 {
+    font-size: 1.8em; /* Further reduce font size for mobile phones */
+  }
+
+  header p {
+    font-size: 0.8em; /* Further reduce font size for mobile phones */
+  }
+
+  /* Adjust the mode toggle size further */
+  #mode-toggle {
+    top: 5px;
+    left: 5px;
+    font-size: 0.7em; /* Even smaller on phones */
+  }
+}
