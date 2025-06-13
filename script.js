@@ -6,7 +6,7 @@ const collections = {
   street: 9,
   portraits: 4,
   theatre: 3,
-  landscapes: 7,
+  landscapes: 8,
   nature: 5
 };
 
