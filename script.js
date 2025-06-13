@@ -7,7 +7,8 @@ const collections = {
   portraits: 4,
   theatre: 3,
   landscapes: 8,
-  nature: 5
+  nature: 5,
+  photoproject1: 4
 };
 
 let currentIndex = 0;
