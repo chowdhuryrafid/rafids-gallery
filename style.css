@@ -57,13 +57,21 @@ footer {
 }
 
 #lightbox {
-  display: none;
+  display: flex;
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.85);
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+#lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 #lightbox-img {
@@ -157,75 +165,38 @@ input:checked + .slider:before {
   color: white;
 }
 
-/* Mobile and tablet styles */
-@media (max-width: 768px) {
-
-  /* Gallery Collection Thumbnails */
-  .collections {
-    flex-direction: column; /* Stack the collections vertically */
-    margin: 20px; /* Adjust margin for smaller screens */
-  }
-
-  .collection {
-    width: 100%; /* Make each collection item take full width */
-    margin-bottom: 20px; /* Add some space between the collections */
-  }
-
-  .collection img {
-    width: 100%; /* Make the images responsive and fill the container */
-    height: auto; /* Maintain the aspect ratio */
-    border-radius: 8px;
-  }
-
-  /* Header text adjustments */
-  header h1 {
-    font-size: 2em; /* Smaller heading size for mobile */
-  }
-
-  header p {
-    font-size: 0.9em; /* Smaller text size for mobile */
-  }
-
-  /* Lightbox Image adjustments */
-  #lightbox-img {
-    max-width: 80%; /* Limit image size in lightbox */
-    max-height: 80%; /* Limit image height in lightbox */
-  }
-
-  /* Navigation buttons in the lightbox */
-  #prevBtn, #nextBtn {
-    font-size: 2em; /* Smaller buttons for mobile */
-  }
-
-  /* Switch for dark/light mode */
-  #mode-toggle {
-    top: 10px;
-    left: 10px;
-    font-size: 0.8em; /* Reduce size of the mode switch on mobile */
-  }
-
-  /* Footer adjustments */
-  footer {
-    font-size: 0.8em; /* Smaller footer text */
-  }
+/* Spinner */
+#spinner {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border: 5px solid #fff;
+  border-top: 5px solid #999;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 1100;
+  display: none;
 }
 
-/* Very Small Devices (Mobile Phones) */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Mobile responsiveness remains the same */
+@media (max-width: 768px) {
+  .collections { flex-direction: column; margin: 20px; }
+  .collection { width: 100%; margin-bottom: 20px; }
+  .collection img { width: 100%; height: auto; }
+  header h1 { font-size: 2em; }
+  header p { font-size: 0.9em; }
+  #lightbox-img { max-width: 80%; max-height: 80%; }
+  #prevBtn, #nextBtn { font-size: 2em; }
+  #mode-toggle { top: 10px; left: 10px; font-size: 0.8em; }
+  footer { font-size: 0.8em; }
+}
+
 @media (max-width: 480px) {
-
-  /* Header text adjustments */
-  header h1 {
-    font-size: 1.8em; /* Further reduce font size for mobile phones */
-  }
-
-  header p {
-    font-size: 0.8em; /* Further reduce font size for mobile phones */
-  }
-
-  /* Adjust the mode toggle size further */
-  #mode-toggle {
-    top: 5px;
-    left: 5px;
-    font-size: 0.7em; /* Even smaller on phones */
-  }
+  header h1 { font-size: 1.8em; }
+  header p { font-size: 0.8em; }
+  #mode-toggle { top: 5px; left: 5px; font-size: 0.7em; }
 }
