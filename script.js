@@ -73,24 +73,39 @@ modeSwitch.addEventListener('change', () => {
   modeLabel.textContent = modeSwitch.checked ? 'Light Mode' : 'Dark Mode';
 });
 
-// Swipe navigation
+// Swipe navigation with vertical tolerance
 let touchStartX = 0;
+let touchStartY = 0;
 let touchEndX = 0;
+let touchEndY = 0;
 
 lightbox.addEventListener('touchstart', (e) => {
   touchStartX = e.changedTouches[0].screenX;
-});
+  touchStartY = e.changedTouches[0].screenY;
+}, { passive: false });
+
+lightbox.addEventListener('touchmove', (e) => {
+  e.preventDefault(); // Prevent page scroll during swipe
+}, { passive: false });
 
 lightbox.addEventListener('touchend', (e) => {
   touchEndX = e.changedTouches[0].screenX;
+  touchEndY = e.changedTouches[0].screenY;
   handleGesture();
 });
 
 function handleGesture() {
-  if (touchEndX < touchStartX - 50) {
-    navigate(1);
-  }
-  if (touchEndX > touchStartX + 50) {
-    navigate(-1);
+  const deltaX = touchEndX - touchStartX;
+  const deltaY = touchEndY - touchStartY;
+
+  const horizontalSwipe = Math.abs(deltaX) > 50;
+  const verticalTolerance = Math.abs(deltaY) < 50;
+
+  if (horizontalSwipe && verticalTolerance) {
+    if (deltaX < 0) {
+      navigate(1); // Swipe left → next
+    } else {
+      navigate(-1); // Swipe right → previous
+    }
   }
 }
