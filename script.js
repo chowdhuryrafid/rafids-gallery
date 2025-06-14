@@ -1,69 +1,202 @@
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-const modeSwitch = document.getElementById('modeSwitch');
-const modeLabel = document.getElementById('modeLabel');
-const collections = {
-  street: 9,
-  portraits: 4,
-  theatre: 3,
-  landscapes: 8,
-  nature: 5,
-  photoproject: 4
-};
-
-let currentIndex = 0;
-let currentCollection = '';
-let photos = [];
-
-function openGallery(folder) {
-  currentCollection = folder;
-  photos = Array.from({ length: collections[folder] }, (_, i) => `images/${folder}/${folder}photo${i + 1}.JPG`);
-  currentIndex = 0;
-  preloadImages(); // Preload images before opening the lightbox
-  openLightbox();
+body {
+  font-family: 'Barlow Condensed', sans-serif;
+  margin: 0;
+  background-color: #fdfdfd;
+  color: #000;
+  transition: background-color 1.3s, color 1.3s;
 }
 
-function openLightbox() {
-  updateLightboxImage();
-  lightbox.style.display = 'flex';
+header, footer {
+  background-color: #fff;
+  text-align: center;
+  padding: 1em;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 1.3s;
 }
 
-function updateLightboxImage() {
-  lightboxImg.src = photos[currentIndex];
+header h1 {
+  font-size: 3em;
+  margin: 0;
 }
 
-function closeLightbox() {
-  lightbox.style.display = 'none';
+header p {
+  font-size: 1em;
+  margin: 0.5em 0 0;
 }
 
-function navigate(direction) {
-  currentIndex = (currentIndex + direction + photos.length) % photos.length;
-  updateLightboxImage();
+footer {
+  font-size: 0.9em;
 }
 
-function outsideClick(event) {
-  if (event.target === lightbox) {
-    closeLightbox();
-  }
+.collections {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 40px auto;
+  gap: 2em;
+  max-width: 1200px;
 }
 
-document.addEventListener('keydown', (e) => {
-  if (lightbox.style.display === 'flex') {
-    if (e.key === 'ArrowRight') navigate(1);
-    if (e.key === 'ArrowLeft') navigate(-1);
-    if (e.key === 'Escape') closeLightbox();
-  }
-});
+.collection {
+  text-align: center;
+  cursor: pointer;
+}
 
-modeSwitch.addEventListener('change', () => {
-  document.body.classList.toggle('dark-mode', modeSwitch.checked);
-  modeLabel.textContent = modeSwitch.checked ? 'Light Mode' : 'Dark Mode';
-});
+.collection img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
 
-// Preload images in the gallery
-function preloadImages() {
-  photos.forEach(photo => {
-    const img = new Image();
-    img.src = photo; // This loads the image
-  });
+.collection span {
+  display: block;
+  margin-top: 0.5em;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#lightbox {
+  display: flex;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+#lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#lightbox-img {
+  max-width: 90%;
+  max-height: 90%;
+  border: 10px solid #000;
+  box-shadow: 0 0 0 20px #fff;
+}
+
+#prevBtn, #nextBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 3em;
+  padding: 0 0.5em;
+  cursor: pointer;
+  user-select: none;
+}
+
+#prevBtn { left: 5%; }
+#nextBtn { right: 5%; }
+
+#mode-toggle {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+  margin-right: 0.5em;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  border-radius: 50px;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #444;
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+.dark-mode {
+  background-color: #111;
+  color: white;
+}
+
+.dark-mode header,
+.dark-mode footer {
+  background-color: #000;
+  box-shadow: 0 0 30px 15px white;
+}
+
+.dark-mode #modeLabel {
+  color: white;
+}
+
+/* Spinner */
+#spinner {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border: 5px solid #fff;
+  border-top: 5px solid #999;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 1100;
+  display: none;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Mobile responsiveness remains the same */
+@media (max-width: 768px) {
+  .collections { flex-direction: column; margin: 20px; }
+  .collection { width: 100%; margin-bottom: 20px; }
+  .collection img { width: 100%; height: auto; }
+  header h1 { font-size: 2em; }
+  header p { font-size: 0.9em; }
+  #lightbox-img { max-width: 80%; max-height: 80%; }
+  #prevBtn, #nextBtn { font-size: 2em; }
+  #mode-toggle { top: 10px; left: 10px; font-size: 0.8em; }
+  footer { font-size: 0.8em; }
+}
+
+@media (max-width: 480px) {
+  header h1 { font-size: 1.8em; }
+  header p { font-size: 0.8em; }
+  #mode-toggle { top: 5px; left: 5px; font-size: 0.7em; }
 }
