@@ -70,10 +70,10 @@
 
   <div id="lightbox" onclick="outsideClick(event)">
         <button id="closeBtn" aria-label="Close">&#10005;</button>
-        <button id="prevBtn" onclick="navigate(-1)">&#10094;</button>
-    <img id="lightbox-img" src="" alt="Full View">
+    <button id="prevBtn" onclick="navigate(-1)" aria-label="Previous photo">&#10094;</button>
+        <img id="lightbox-img" src="" alt="Full View">
     <div id="spinner"></div>
-    <button id="nextBtn" onclick="navigate(1)">&#10095;</button>
+    <button id="nextBtn" onclick="navigate(1)" aria-label="Next photo">&#10095;</button>
         <div id="lightbox-counter"></div>
   </div>
 
