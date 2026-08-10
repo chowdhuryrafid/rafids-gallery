@@ -12,7 +12,6 @@ const collections = {
   theatre: 3,
   landscapes: 8,
   nature: 5,
-  photoproject: 4
 };
 
 // Human-readable names, used for alt text and the on-screen counter.
@@ -22,7 +21,6 @@ const collectionLabels = {
     theatre: 'Theatre',
     landscapes: 'Landscapes',
     nature: 'Nature',
-    photoproject: 'The Wat Arun Project'
 };
 
 let currentIndex = 0;
