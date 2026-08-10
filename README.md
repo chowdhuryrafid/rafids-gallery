@@ -1,7 +1,7 @@
 # Rafid's Gallery
 
 A personal photography gallery built using GitHub Pages.  
-Visit it at: `https://yourusername.github.io/rafids-gallery/`
+Visit it at: `https://chowdhuryrafid.github.io/rafids-gallery/`
 
 Replace images in the `images/` folder with your own. Retain the naming sequence like "portraitsphoto4.JPG"
 <
