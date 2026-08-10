@@ -11,7 +11,6 @@ const collections = {
   portraits: 4,
   theatre: 3,
   landscapes: 8,
-  nature: 5,
 };
 
 // Human-readable names, used for alt text and the on-screen counter.
@@ -20,7 +19,6 @@ const collectionLabels = {
     portraits: 'Portraits',
     theatre: 'Theatre',
     landscapes: 'Landscapes',
-    nature: 'Nature',
 };
 
 let currentIndex = 0;
