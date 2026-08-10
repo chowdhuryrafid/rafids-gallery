@@ -4,6 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rafid's Gallery</title>
+    <meta name="description" content="A personal photography gallery by Rafid — street, portrait, theatre, landscape, and nature photography." />
+
+    <!-- Open Graph / social preview -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Rafid's Gallery" />
+    <meta property="og:description" content="A personal photography gallery by Rafid — street, portrait, theatre, landscape, and nature photography." />
+    <meta property="og:image" content="https://chowdhuryrafid.github.io/rafids-gallery/images/og-image.jpg" />
+    <meta property="og:url" content="https://chowdhuryrafid.github.io/rafids-gallery/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Rafid's Gallery" />
+    <meta name="twitter:description" content="A personal photography gallery by Rafid — street, portrait, theatre, landscape, and nature photography." />
+    <meta name="twitter:image" content="https://chowdhuryrafid.github.io/rafids-gallery/images/og-image.jpg" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png" />
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -54,10 +69,12 @@
   </main>
 
   <div id="lightbox" onclick="outsideClick(event)">
-    <button id="prevBtn" onclick="navigate(-1)">&#10094;</button>
+        <button id="closeBtn" aria-label="Close">&#10005;</button>
+        <button id="prevBtn" onclick="navigate(-1)">&#10094;</button>
     <img id="lightbox-img" src="" alt="Full View">
     <div id="spinner"></div>
     <button id="nextBtn" onclick="navigate(1)">&#10095;</button>
+        <div id="lightbox-counter"></div>
   </div>
 
   <footer>
