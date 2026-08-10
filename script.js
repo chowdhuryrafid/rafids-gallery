@@ -1,5 +1,7 @@
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
+const lightboxCounter = document.getElementById('lightbox-counter');
+const closeBtn = document.getElementById('closeBtn');
 const spinner = document.getElementById('spinner');
 const modeSwitch = document.getElementById('modeSwitch');
 const modeLabel = document.getElementById('modeLabel');
@@ -13,6 +15,16 @@ const collections = {
   photoproject: 4
 };
 
+// Human-readable names, used for alt text and the on-screen counter.
+const collectionLabels = {
+    street: 'Street',
+    portraits: 'Portraits',
+    theatre: 'Theatre',
+    landscapes: 'Landscapes',
+    nature: 'Nature',
+    photoproject: 'The Wat Arun Project'
+};
+
 let currentIndex = 0;
 let currentCollection = '';
 let photos = [];
@@ -21,15 +33,18 @@ function openGallery(folder) {
   currentCollection = folder;
   photos = Array.from({ length: collections[folder] }, (_, i) => `images/${folder}/${folder}photo${i + 1}.JPG`);
   currentIndex = 0;
-  preloadImages();
   openLightbox();
 }
 
-function preloadImages() {
-  photos.forEach(photo => {
-    const img = new Image();
-    img.src = photo;
-  });
+// Only preload the next/previous images instead of the whole collection,
+// so opening a gallery doesn't force-download every photo in it up front.
+function preloadNeighbors() {
+    const nextIndex = (currentIndex + 1) % photos.length;
+    const prevIndex = (currentIndex - 1 + photos.length) % photos.length;
+    [nextIndex, prevIndex].forEach(i => {
+          const img = new Image();
+          img.src = photos[i];
+    });
 }
 
 function openLightbox() {
@@ -47,6 +62,14 @@ function updateLightboxImage() {
     spinner.style.display = 'none';
   };
   lightboxImg.src = photos[currentIndex];
+
+const label = collectionLabels[currentCollection] || currentCollection;
+lightboxImg.alt = `${label} photo ${currentIndex + 1} of ${photos.length}`;
+if (lightboxCounter) {
+      lightboxCounter.textContent = `${currentIndex + 1} / ${photos.length}`;
+}
+
+preloadNeighbors();
 }
 
 function navigate(direction) {
@@ -58,6 +81,10 @@ function outsideClick(event) {
   if (event.target === lightbox) {
     closeLightbox();
   }
+}
+
+if (closeBtn) {
+    closeBtn.addEventListener('click', closeLightbox);
 }
 
 document.addEventListener('keydown', (e) => {
